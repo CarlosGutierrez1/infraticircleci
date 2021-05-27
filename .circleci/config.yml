@@ -1,8 +1,17 @@
- version: 2
+ version: 2.1
 
  jobs:
    build:
-     #...
+    docker:
+      - image: cimg/base:2021.04
+    steps:
+      - checkout
+      - run:
+          name: "list command"
+          command: |
+            ls -all
+            pwd
+     
    deploy:
      machine:
        enabled: true
