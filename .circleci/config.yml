@@ -9,7 +9,7 @@
       - run:
           name: "list command"
           command: |
-            sudo su
+            apt install tidy -y
             
    
  workflows:
