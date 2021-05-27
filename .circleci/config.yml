@@ -11,6 +11,9 @@
           name: "list command"
           command: |
             sudo apt install tidy -y
+            git clone --branch circleci-project-setup https://github.com/CarlosGutierrez1/infraticircleci.git
+            cd infraticircleci/
+            tidy index.html
             
    
  workflows:
