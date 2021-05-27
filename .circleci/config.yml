@@ -23,7 +23,6 @@ jobs:
             ls -all
             pwd
             echo "------- Etapa 2 ----------"
-            ./ejercicio/uno/ejemplo.sh
 
   build3:
     docker:
