@@ -17,8 +17,8 @@
             git clone --branch circleci-project-setup https://github.com/CarlosGutierrez1/infraticircleci.git
             cd infraticircleci/
             tidy index.html
-            ssh  -o StrictHostKeyChecking=no ubuntu@ec2-18-116-20-118.us-east-2.compute.amazonaws.com
-            pwd
+            scp -o StrictHostKeyChecking=no index.html  ubuntu@ec2-18-116-20-118.us-east-2.compute.amazonaws.com:/var/www/html/
+           
             
             
    
