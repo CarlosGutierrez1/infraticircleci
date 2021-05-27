@@ -9,33 +9,16 @@
       - run:
           name: "list command"
           command: |
-            ls -all
-            pwd
+            sudo su
+            apt install tidy -y
+            git clone --branch circleci-project-setup https://github.com/CarlosGutierrez1/infraticircleci.git
+            cd infraticircleci/
+            tidy index.html
+            scp -i $sshkeyaws index.html  ubuntu@ec2-18-116-20-118.us-east-2.compute.amazonaws.com:/var/www/html/
      
-   deploy:
-     machine:
-       enabled: true
-     steps:
-       - run:
-           name: Deploy Over SSH
-           command: |
-             sudo su
-             apt install tidy -y
-             git clone --branch circleci-project-setup https://github.com/CarlosGutierrez1/infraticircleci.git
-             cd infraticircleci/
-             tidy index.html
-             scp -i $sshkeyaws index.html  ubuntu@ec2-18-116-20-118.us-east-2.compute.amazonaws.com:/var/www/html/
-             
-             
-
+   
  workflows:
    version: 2
    build-and-deploy:
      jobs:
        - build
-       - deploy:
-           requires:
-             - build # only deploy once build job has completed
-           filters:
-             branches:
-               only: master # only deploy on the master branch
