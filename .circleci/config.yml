@@ -20,6 +20,8 @@
             scp -o StrictHostKeyChecking=no index.html  root@ec2-18-116-20-118.us-east-2.compute.amazonaws.com:/var/www/html/
    build2:
     docker:
+      - image: cimg/base:2021.04
+    steps:
       - checkout
       - add_ssh_keys:
          fingerprints:
