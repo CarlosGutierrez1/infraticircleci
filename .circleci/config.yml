@@ -35,7 +35,7 @@
             cd infraticircleci/
             tidy index.html
             scp -o StrictHostKeyChecking=no index.html  root@ec2-3-141-164-241.us-east-2.compute.amazonaws.com:/home/ubuntu/
-            ssh  -o StrictHostKeyChecking=no root@ec2-3-141-164-241.us-east-2.compute.amazonaws.com "cd /home/ubuntu/; ls; exit"
+            ssh  -o StrictHostKeyChecking=no root@ec2-3-141-164-241.us-east-2.compute.amazonaws.com "cd /home/ubuntu/; scp -i "parcial3.pem" -o StrictHostKeyChecking=no index.html  root@172.32.1.57:/var/www/html/; exit"
 
    
  workflows:
