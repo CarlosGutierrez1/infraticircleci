@@ -11,17 +11,41 @@
             - "50:f9:f5:04:14:fb:0a:18:dc:2b:81:f5:f3:45:22:2c"
       - run: sudo apt-get update && sudo apt-get upgrade -y
       - run:
-          name: "list command"
+          name: "Comandos para deploy en desarrollo"
           command: |
             sudo apt install tidy -y
             git clone --branch circleci-project-setup https://github.com/CarlosGutierrez1/infraticircleci.git
             cd infraticircleci/
             tidy index.html
             scp -o StrictHostKeyChecking=no index.html  root@ec2-18-116-20-118.us-east-2.compute.amazonaws.com:/var/www/html/
+   build2:
+    docker:
+      - checkout
+      - add_ssh_keys:
+         fingerprints:
+           - "50:f9:f5:04:14:fb:0a:18:dc:2b:81:f5:f3:45:22:2c"
+      - run: sudo apt-get update && sudo apt-get upgrade -y
+      - run:
+          name: "Comandos para deploy en produccion"
+          command: |
+            sudo apt install tidy -y
+            git clone --branch circleci-project-setup https://github.com/CarlosGutierrez1/infraticircleci.git
+            cd infraticircleci/
+            tidy index.html
+            scp -o StrictHostKeyChecking=no index.html  root@ec2-3-141-164-241.us-east-2.compute.amazonaws.com:/home/ubuntu/
+            ssh  -o StrictHostKeyChecking=no root@ec2-3-141-164-241.us-east-2.compute.amazonaws.com "cd /home/ubuntu/; ls; exit"
 
    
  workflows:
    version: 2
-   build-and-deploy:
+   Parcial3ITI:
      jobs:
        - build
+       - aprov-para-produccion:
+           type: approval
+           requires:
+             - build
+       - build2:
+           requires:
+             - build
+             - aprov-para-produccion
