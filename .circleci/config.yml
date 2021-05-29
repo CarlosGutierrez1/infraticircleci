@@ -70,7 +70,9 @@
    Parcial3ITI:
      jobs:
        - build
-       - build2
+       - build2:
+           requires:
+             - build
        - aprov-para-produccion:
            type: approval
            requires:
